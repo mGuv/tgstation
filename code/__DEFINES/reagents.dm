@@ -51,8 +51,6 @@
 #define DEFAULT_REAGENT_TEMPERATURE 300
 
 //Used in holder.dm/equlibrium.dm to set values and volume limits
-///stops floating point errors causing issues with checking reagent amounts
-#define CHEMICAL_QUANTISATION_LEVEL 0.0001
 ///The smallest amount of volume allowed - prevents tiny numbers
 #define CHEMICAL_VOLUME_MINIMUM 0.001
 ///Round to this, to prevent extreme decimal magic and to keep reagent volumes in line with perceived values.

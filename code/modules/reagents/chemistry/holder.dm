@@ -168,9 +168,6 @@
 	if(!isnum(amount) || !amount)
 		return FALSE
 
-	if(amount <= CHEMICAL_QUANTISATION_LEVEL)//To prevent small amount problems.
-		return FALSE
-
 	var/datum/reagent/glob_reagent = GLOB.chemical_reagents_list[reagent]
 	if(!glob_reagent)
 		stack_trace("[my_atom] attempted to add a reagent called '[reagent]' which doesn't exist. ([usr])")
@@ -213,7 +210,7 @@
 			iter_reagent.purity = ((iter_reagent.creation_purity * iter_reagent.volume) + (added_purity * amount)) /(iter_reagent.volume + amount) //This should add the purity to the product
 			iter_reagent.creation_purity = iter_reagent.purity
 			iter_reagent.ph = ((iter_reagent.ph*(iter_reagent.volume))+(added_ph*amount))/(iter_reagent.volume+amount)
-			iter_reagent.volume += round(amount, CHEMICAL_QUANTISATION_LEVEL)
+			iter_reagent.volume += amount
 			update_total()
 
 			iter_reagent.on_merge(data, amount)
@@ -415,7 +412,7 @@
 					return FALSE
 				return holder_reagent
 			else
-				if(round(holder_reagent.volume, CHEMICAL_QUANTISATION_LEVEL) >= amount)
+				if(holder_reagent.volume >= amount)
 					if(needs_metabolizing && !holder_reagent.metabolizing)
 						return FALSE
 					return holder_reagent
@@ -1230,7 +1227,7 @@
 	var/list/cached_reagents = reagent_list
 	for(var/datum/reagent/cached_reagent as anything in cached_reagents)
 		if(cached_reagent.type == reagent)
-			return round(cached_reagent.volume, CHEMICAL_QUANTISATION_LEVEL)
+			return cached_reagent.volume
 	return 0
 
 /// Get the purity of this reagent

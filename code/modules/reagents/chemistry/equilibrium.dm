@@ -89,7 +89,7 @@
 /datum/equilibrium/proc/check_inital_conditions()
 	//Make sure we have the right multipler for on_reaction()
 	for(var/single_reagent in reaction.required_reagents)
-		multiplier = min(multiplier, round((holder.get_reagent_amount(single_reagent) / reaction.required_reagents[single_reagent]), CHEMICAL_QUANTISATION_LEVEL))
+		multiplier = min(multiplier, (holder.get_reagent_amount(single_reagent) / reaction.required_reagents[single_reagent]))
 	if(multiplier == INFINITY)
 		return FALSE
 	//Consider purity gating too? - probably not, purity is hard to determine
@@ -150,7 +150,7 @@
 
 	multiplier = INFINITY
 	for(var/reagent in reaction.required_reagents)
-		multiplier = min(multiplier, round((holder.get_reagent_amount(reagent) / reaction.required_reagents[reagent]), CHEMICAL_QUANTISATION_LEVEL))
+		multiplier = min(multiplier, (holder.get_reagent_amount(reagent) / reaction.required_reagents[reagent]))
 
 	if(!length(reaction.results)) //Incase of no reagent product
 		product_ratio = 1
@@ -328,7 +328,6 @@
 		delta_chem_factor = CHEMICAL_VOLUME_MINIMUM
 	//Normalise to multiproducts
 	delta_chem_factor /= product_ratio
-	//delta_chem_factor = round(delta_chem_factor, CHEMICAL_QUANTISATION_LEVEL) // Might not be needed - left here incase testmerge shows that it does. Remove before full commit.
 
 	//Calculate how much product to make and how much reactant to remove factors..
 	for(var/reagent in reaction.required_reagents)
