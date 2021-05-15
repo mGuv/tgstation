@@ -53,8 +53,6 @@
 //Used in holder.dm/equlibrium.dm to set values and volume limits
 ///The smallest amount of volume allowed - prevents tiny numbers
 #define CHEMICAL_VOLUME_MINIMUM 0.001
-///Round to this, to prevent extreme decimal magic and to keep reagent volumes in line with perceived values.
-#define CHEMICAL_VOLUME_ROUNDING 0.01
 ///Default pH for reagents datum
 #define CHEMICAL_NORMAL_PH 7.000
 ///The maximum temperature a reagent holder can attain
